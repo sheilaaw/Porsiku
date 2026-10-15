@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Porsiku – your meal your way</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="logo-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav"><div class="nav-in">
+  <a class="brand" href="#" onclick="show('landing');return false"><img src="logo-icon.png" alt=""><span>Porsi<b>ku</b></span></a>
+  <div class="nav-r"><a class="link" href="#" onclick="openKonsul();return false">Konsultasi</a><button class="btn sm" id="navBtn" onclick="startFlow()">Mulai</button></div>
+</div></header>
+
+<main id="landing" class="view active">
+  <section class="hero"><div class="hero-text">
+    <h1>Your Meal <br><u>Your</u>Way.</h1>
+    <p>Masukin BB & TB, kami hitung IMT dan kebutuhan energimu (Harris-Benedict), lalu kasih menu yang porsinya disesuaikan buat kamu.</p>
+    <button class="btn" onclick="startFlow()">Hitung porsiku ✨</button>
+  </div><img class="hero-logo" src="logo.jpeg" alt="Logo Porsiku – Your Meal Your Way"></section>
+  <div class="marquee"><div class="track" id="m1"></div></div>
+</main>
+
+<main id="onboarding" class="view">
+  <form id="form" class="form">
+    <h2>Kenalan dulu yuk 👋</h2>
+    <p class="muted">Cuma butuh data buat hitung IMT & Harris-Benedict.</p>
+    <div class="grid">
+      <label>Nama<input name="nama" required placeholder="Nama panggilan"></label>
+      <label>Jenis kelamin
+        <select name="jk"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select></label>
+      <label>Usia (tahun)<input type="number" name="usia" min="2" max="100" required></label>
+      <label>Berat badan (kg)<input type="number" name="bb" min="5" max="250" step="0.1" required></label>
+      <label>Tinggi badan (cm)<input type="number" name="tb" min="60" max="230" step="0.1" required></label>
+    </div>
+    <h3>Kegiatan sehari-harimu paling mirip yang mana?</h3>
+    <div class="acts" id="acts"></div>
+    <h3>Alergi makanan <small class="muted">(opsional)</small></h3>
+    <div class="chips" id="alergi"></div>
+    <label class="consent"><input type="checkbox" name="setuju" required><span>Aku setuju data di atas (nama, usia, BB, TB, alergi) disimpan admin Porsiku untuk layanan gizi dan konsultasi.</span></label>
+    <button class="btn" type="submit">Lihat dashboard 🚀</button>
+  </form>
+</main>
+
+<main id="dashboard" class="view">
+  <section class="dash-head">
+    <div><h2 id="halo"></h2><p class="muted" id="ringkas"></p></div>
+    <button class="btn sm ghost" onclick="show('onboarding')">Ubah data</button>
+  </section>
+  <div class="marquee small"><div class="track" id="m2"></div></div>
+  <section class="bento" id="stats"></section>
+
+  <section class="box">
+    <h3>Tabel faktor aktivitas</h3>
+    <div class="tabs" id="tabs"></div>
+    <div class="table-wrap"><table id="tabel"></table></div>
+    <p class="muted small" id="catatan"></p>
+  </section>
+
+  <h3 class="sec">Menu harian buat kamu</h3>
+  <p class="muted" id="resepInfo"></p>
+  <section class="recipes" id="resep"></section>
+  <section class="box konsul"><div><h3>Mau konsultasi dengan ahli gizi?</h3><p class="muted">Bayar lewat QRIS, lalu datamu terkirim otomatis ke WhatsApp ahli gizi.</p></div><button class="btn" onclick="openKonsul()">Konsultasi sekarang 💬</button></section>
+</main>
+<div class="modal" id="modal" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <button class="x" onclick="closeKonsul()" aria-label="Tutup">✕</button>
+  <h3 id="mt">Konsultasi ahli gizi</h3>
+  <ol class="steps"><li>Tulis pertanyaan</li><li>Bayar via QRIS</li><li>Kirim ke WhatsApp</li></ol>
+  <label>Keluhan / pertanyaanmu<textarea id="keluhan" rows="3" placeholder="Contoh: aku mau naik berat badan, menu apa yang cocok?"></textarea></label>
+  <div class="qris"><img src="qris.jpeg" alt="QRIS Porsiku"><p id="harga"></p><p class="small muted">Scan pakai aplikasi bank atau e-wallet apa saja, lalu screenshot bukti bayarnya.</p></div>
+  <label class="consent"><input type="checkbox" id="sudahBayar"><span>Aku sudah membayar lewat QRIS</span></label>
+  <button class="btn" id="waBtn" disabled onclick="kirimWA()">Kirim ke WhatsApp ahli gizi</button>
+  <p class="small muted">Setelah WhatsApp terbuka, lampirkan screenshot bukti bayar di chat. Konsultasi dimulai setelah admin mengecek pembayaranmu.</p>
+</div></div>
+<footer>© Porsiku · your meal your way · Nilai gizi mengacu pada TKPI 2020. Bukan pengganti saran ahli gizi.</footer>
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
